@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ripassa l'America — Geografia Classe Terza</title>
+<style>
+  :root {
+    --bg: #f7f3ec;
+    --bg-card: #ffffff;
+    --ink: #2b2a26;
+    --ink-soft: #5c5a52;
+    --accent-earth: #a0522d;
+    --accent-earth-soft: #d4a574;
+    --accent-water: #3a6ea5;
+    --accent-water-soft: #b3d4ec;
+    --accent-forest: #5a7a3a;
+    --accent-forest-soft: #c4d4a5;
+    --accent-sand: #e8d9b8;
+    --accent-sun: #e8a33d;
+    --border: #e4ddd0;
+    --shadow: 0 2px 8px rgba(43, 42, 38, 0.08);
+    --shadow-hover: 0 6px 20px rgba(43, 42, 38, 0.12);
+    --radius: 14px;
+    --font-size-base: 17px;
+  }
+
+  body.high-readability {
+    font-family: Verdana, "Trebuchet MS", sans-serif !important;
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+  }
+
+  body.larger-text {
+    --font-size-base: 20px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: "Georgia", "Iowan Old Style", "Palatino", serif;
+    font-size: var(--font-size-base);
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(180, 160, 120, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(120, 150, 180, 0.06) 0%, transparent 40%);
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #3a2e22 0%, #5a4530 100%);
+    color: #f7f3ec;
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--accent-earth);
+  }
+
+  header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 40%, rgba(232, 163, 61, 0.15) 0%, transparent 30%),
+      radial-gradient(circle at 80% 60%, rgba(180, 212, 236, 0.1) 0%, transparent 30%);
+  }
+
+  header h1 {
+    margin: 0 0 0.3rem;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+
+  header p {
+    margin: 0;
+    font-style: italic;
+    opacity: 0.9;
+    font-size: 1.05rem;
+    position: relative;
+  }
+
+  .compass {
+    display: inline-block;
+    margin-right: 0.5rem;
+    animation: gentle-spin 20s linear infinite;
+    transform-origin: center;
+  }
+
+  @keyframes gentle-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Toolbar UDL */
+  .toolbar {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+
+  .tool-btn {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .tool-btn:hover, .tool-btn:focus {
+    border-color: var(--accent-earth);
+    color: var(--accent-earth);
+    outline: none;
+  }
+
+  .tool-btn.active {
+    background: var(--accent-earth);
+    color: white;
+    border-color: var(--accent-earth);
+  }
+
+  /* Navigation */
+  nav {
+    max-width: 1100px;
+    margin: 2rem auto 1rem;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .nav-btn {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.7rem 1.1rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: var(--shadow);
+  }
+
+  .nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-earth-soft);
+  }
+
+  .nav-btn.active {
+    background: var(--accent-earth);
+    color: white;
+    border-color: var(--accent-earth);
+  }
+
+  /* Main content */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 1rem 4rem;
+  }
+
+  .section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-intro {
+    background: var(--bg-card);
+    border-left: 5px solid var(--accent-earth);
+    padding: 1.5rem 1.8rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+
+  .section-intro h2 {
+    margin: 0 0 0.5rem;
+    color: var(--accent-earth);
+    font-size: 1.5rem;
+  }
+
+  .section-intro p {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--accent-earth);
+    transition: all 0.25s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .card.water { border-top-color: var(--accent-water); }
+  .card.forest { border-top-color: var(--accent-forest); }
+  .card.sun { border-top-color: var(--accent-sun); }
+
+  .card h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.15rem;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .card p { margin: 0.4rem 0; }
+
+  .card ul {
+    margin: 0.6rem 0;
+    padding-left: 1.3rem;
+  }
+
+  .card li { margin: 0.3rem 0; }
+
+  /* Map container */
+  .map-container {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    box-shadow: var(--shadow);
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+
+  .map-container svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .map-title {
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    font-size: 1.05rem;
+  }
+
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 0.8rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .legend-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Accordion */
+  .accordion {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .accordion-item:last-child { border-bottom: none; }
+
+  .accordion-header {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 1.1rem 1.3rem;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .accordion-header:hover { background: var(--bg); }
+
+  .accordion-header .arrow {
+    transition: transform 0.3s;
+    color: var(--accent-earth);
+    font-size: 1.2rem;
+  }
+
+  .accordion-item.open .arrow { transform: rotate(90deg); }
+
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .accordion-body-inner { padding: 0 1.3rem 1.3rem; }
+
+  .accordion-item.open .accordion-body { max-height: 2000px; }
+
+  /* Quiz */
+  .quiz-intro {
+    background: linear-gradient(135deg, #fff 0%, #fdf6e8 100%);
+    border: 2px solid var(--accent-sun);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+  }
+
+  .quiz-intro h2 {
+    margin-top: 0;
+    color: var(--accent-earth);
+  }
+
+  .quiz-question {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    margin: 1rem 0;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--accent-water);
+  }
+
+  .quiz-question h4 {
+    margin: 0 0 1rem;
+    font-size: 1.08rem;
+    color: var(--ink);
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .quiz-option {
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    font-family: inherit;
+    font-size: 0.98rem;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+  }
+
+  .quiz-option:hover:not(:disabled) {
+    border-color: var(--accent-water);
+    background: var(--accent-water-soft);
+  }
+
+  .quiz-option.correct {
+    border-color: var(--accent-forest);
+    background: var(--accent-forest-soft);
+    font-weight: 600;
+  }
+
+  .quiz-option.wrong {
+    border-color: #c94a4a;
+    background: #f5d4d4;
+  }
+
+  .quiz-option:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 0.8rem;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+
+  .quiz-feedback.right {
+    background: #e6f0d9;
+    color: #3d5221;
+    border-left: 4px solid var(--accent-forest);
+  }
+
+  .quiz-feedback.improve {
+    background: #fde9c9;
+    color: #7a4a0f;
+    border-left: 4px solid var(--accent-sun);
+  }
+
+  .quiz-score {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1.8rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-top: 1.5rem;
+    display: none;
+  }
+
+  .quiz-score.show { display: block; }
+
+  .quiz-score h3 {
+    margin-top: 0;
+    color: var(--accent-earth);
+  }
+
+  .score-big {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-earth);
+    margin: 0.5rem 0;
+  }
+
+  /* Glossary */
+  .glossary-term {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    padding: 1rem 1.3rem;
+    margin: 0.7rem 0;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--accent-forest);
+  }
+
+  .glossary-term strong { color: var(--accent-earth); }
+
+  /* Highlight */
+  .highlight {
+    background: linear-gradient(120deg, transparent 0%, #fde9c9 50%, transparent 100%);
+    padding: 0 4px;
+    font-weight: 600;
+  }
+
+  /* Pills */
+  .pill {
+    display: inline-block;
+    padding: 0.15rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin: 0.15rem 0.2rem 0.15rem 0;
+    background: var(--accent-sand);
+    color: var(--ink);
+  }
+
+  .pill.water { background: var(--accent-water-soft); color: var(--accent-water); }
+  .pill.forest { background: var(--accent-forest-soft); color: var(--accent-forest); }
+  .pill.earth { background: var(--accent-earth-soft); color: #6a3416; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+
+  .btn-primary {
+    background: var(--accent-earth);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: #8b4423;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .tip-box {
+    background: #eaf3f9;
+    border-left: 4px solid var(--accent-water);
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+
+  .tip-box strong { color: var(--accent-water); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header { padding: 1.5rem 1rem; }
+    nav { gap: 0.3rem; }
+    .nav-btn { padding: 0.55rem 0.8rem; font-size: 0.88rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .toolbar { gap: 0.3rem; padding: 0.5rem; }
+    .tool-btn { font-size: 0.78rem; padding: 0.3rem 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="compass">🧭</span>Ripassa l'America</h1>
+  <p>Strumento di studio per la verifica di geografia — Classe terza</p>
+</header>
+
+<div class="toolbar" role="toolbar" aria-label="Strumenti di lettura">
+  <button class="tool-btn" id="btn-readable" aria-pressed="false">🔤 Font leggibile</button>
+  <button class="tool-btn" id="btn-large" aria-pressed="false">🔍 Testo grande</button>
+  <button class="tool-btn" id="btn-read" aria-pressed="false">🔊 Leggi ad alta voce</button>
+  <button class="tool-btn" id="btn-stop">⏹ Stop</button>
+</div>
+
+<nav role="navigation" aria-label="Sezioni di ripasso">
+  <button class="nav-btn active" data-target="territorio">🗻 Territorio</button>
+  <button class="nav-btn" data-target="acque">💧 Acque</button>
+  <button class="nav-btn" data-target="ambienti">🌿 Ambienti</button>
+  <button class="nav-btn" data-target="storia">📜 Storia</button>
+  <button class="nav-btn" data-target="popoli">🗣️ Popoli e lingue</button>
+  <button class="nav-btn" data-target="economia">💰 Economia</button>
+  <button class="nav-btn" data-target="glossario">📖 Parole chiave</button>
+  <button class="nav-btn" data-target="quiz">✏️ Mettiti alla prova</button>
+</nav>
+
+<main>
+
+<!-- ============ TERRITORIO ============ -->
+<section class="section active" id="territorio">
+  <div class="section-intro">
+    <h2>🗻 Il territorio e i rilievi</h2>
+    <p>L'America si estende <strong>dal Polo Nord quasi fino all'Antartide</strong>: più di 15.000 km! Per capirla, conviene dividerla in tre parti: settentrionale, centrale e meridionale.</p>
+  </div>
+
+  <div class="map-container">
+    <div class="map-title">Le catene montuose delle Americhe</div>
+    <svg viewBox="0 0 500 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mappa stilizzata delle Americhe con le principali catene montuose">
+      <!-- Oceans background -->
+      <rect x="0" y="0" width="500" height="650" fill="#d9e8f2"/>
+
+      <!-- North America -->
+      <path d="M 60 80 Q 80 60 140 70 L 220 75 Q 280 80 340 95 L 380 120 Q 400 150 390 180 L 380 220 Q 360 250 320 260 L 280 280 L 260 310 L 230 320 L 200 310 L 170 290 L 140 260 L 110 230 L 80 180 L 65 140 Z"
+            fill="#e8d9b8" stroke="#8b7355" stroke-width="1.5"/>
+
+      <!-- Central America -->
+      <path d="M 200 310 L 230 320 L 250 340 L 260 360 L 245 380 L 230 395 L 235 420 L 250 430 L 260 420 Z"
+            fill="#e8d9b8" stroke="#8b7355" stroke-width="1.5"/>
+
+      <!-- Caribbean islands -->
+      <ellipse cx="290" cy="370" rx="25" ry="6" fill="#e8d9b8" stroke="#8b7355" stroke-width="1"/>
+      <ellipse cx="320" cy="375" rx="15" ry="5" fill="#e8d9b8" stroke="#8b7355" stroke-width="1"/>
+      <circle cx="275" cy="365" r="5" fill="#e8d9b8" stroke="#8b7355" stroke-width="1"/>
+
+      <!-- South America -->
+      <path d="M 250 430 L 290 440 Q 330 445 360 465 L 370 500 L 365 540 L 345 580 L 310 610 L 280 625 L 250 615 L 230 580 L 225 540 L 235 500 L 245 460 Z"
+            fill="#e8d9b8" stroke="#8b7355" stroke-width="1.5"/>
+
+      <!-- ANDES (young, tall - Western South America) -->
+      <path d="M 245 455 L 250 490 L 245 525 L 250 560 L 260 595 L 270 615"
+            stroke="#a0522d" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <text x="195" y="530" font-size="14" font-weight="bold" fill="#a0522d" font-family="Georgia">ANDE</text>
+      <text x="190" y="548" font-size="10" fill="#6a3416" font-family="Georgia" font-style="italic">(giovani, alte)</text>
+
+      <!-- Rocky Mountains (young, tall - Western North America) -->
+      <path d="M 95 110 L 105 150 L 115 185 L 125 220 L 135 250"
+            stroke="#a0522d" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <text x="30" y="175" font-size="12" font-weight="bold" fill="#a0522d" font-family="Georgia">MONTAGNE</text>
+      <text x="38" y="190" font-size="12" font-weight="bold" fill="#a0522d" font-family="Georgia">ROCCIOSE</text>
+      <text x="45" y="205" font-size="9" fill="#6a3416" font-family="Georgia" font-style="italic">(giovani)</text>
+
+      <!-- Appalachians (old, low - Eastern North America) -->
+      <path d="M 280 160 L 285 185 L 290 210 L 295 235 L 300 255"
+            stroke="#8b6a3a" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="6,3"/>
+      <text x="310" y="210" font-size="12" font-weight="bold" fill="#8b6a3a" font-family="Georgia">APPALACHI</text>
+      <text x="315" y="225" font-size="9" fill="#6a3416" font-family="Georgia" font-style="italic">(antichi, bassi)</text>
+
+      <!-- Sierra Madre (Central America) -->
+      <path d="M 220 320 L 230 340 L 245 365"
+            stroke="#a0522d" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <text x="150" y="355" font-size="10" font-weight="bold" fill="#a0522d" font-family="Georgia">SIERRA MADRE</text>
+
+      <!-- Brazilian Highlands (old, low - Eastern South America) -->
+      <path d="M 320 490 L 335 510 L 340 535 L 335 560"
+            stroke="#8b6a3a" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="6,3"/>
+      <text x="310" y="485" font-size="10" font-weight="bold" fill="#8b6a3a" font-family="Georgia">MASSICCIO</text>
+      <text x="315" y="498" font-size="10" font-weight="bold" fill="#8b6a3a" font-family="Georgia">BRASILIANO</text>
+
+      <!-- Bering Strait indicator -->
+      <path d="M 30 90 L 60 90" stroke="#3a6ea5" stroke-width="3" stroke-dasharray="4,2"/>
+      <text x="10" y="75" font-size="9" fill="#3a6ea5" font-family="Georgia" font-weight="bold">Stretto di Bering</text>
+      <text x="10" y="105" font-size="9" fill="#3a6ea5" font-family="Georgia">(verso Asia →)</text>
+
+      <!-- Labels -->
+      <text x="150" y="40" font-size="14" font-weight="bold" fill="#5a4530" font-family="Georgia">AMERICA SETTENTRIONALE</text>
+      <text x="170" y="430" font-size="13" font-weight="bold" fill="#5a4530" font-family="Georgia">AMERICA CENTRALE</text>
+      <text x="170" y="640" font-size="14" font-weight="bold" fill="#5a4530" font-family="Georgia">AMERICA MERIDIONALE</text>
+
+      <!-- Compass -->
+      <g transform="translate(440, 50)">
+        <circle r="22" fill="white" stroke="#5a4530" stroke-width="1.5"/>
+        <path d="M 0 -18 L 4 0 L 0 18 L -4 0 Z" fill="#a0522d"/>
+        <text x="-3" y="-24" font-size="10" font-weight="bold" fill="#5a4530" font-family="Georgia">N</text>
+      </g>
+    </svg>
+    <div class="map-legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#a0522d;"></span> Rilievi giovani (alti)</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#8b6a3a;"></span> Rilievi antichi (bassi)</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#d9e8f2;"></span> Oceani</span>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🏔️ Rilievi giovani</h3>
+      <p>Sono catene <strong>alte, strette e appuntite</strong>, nate di recente (pochi milioni di anni). Si trovano tutte lungo la <strong>costa occidentale</strong> del continente, dall'Alaska alla Terra del Fuoco.</p>
+      <ul>
+        <li><strong>Montagne Rocciose</strong> (Nord)</li>
+        <li><strong>Sierra Madre</strong> (Centro, Messico)</li>
+        <li><strong>Ande</strong> (Sud) — la catena più lunga del mondo</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>⛰️ Rilievi antichi</h3>
+      <p>Sono catene <strong>basse, arrotondate ed erose</strong> dal tempo. Si trovano a <strong>est</strong>, vicine all'Oceano Atlantico.</p>
+      <ul>
+        <li><strong>Monti Appalachi</strong> (Nord, costa est USA)</li>
+        <li><strong>Massiccio Brasiliano</strong> (Sud)</li>
+        <li><strong>Massiccio della Guiana</strong> (Sud)</li>
+      </ul>
+    </div>
+    <div class="card sun">
+      <h3>🏜️ America centrale</h3>
+      <p>Un <strong>istmo</strong> stretto che unisce Nord e Sud America, più l'arcipelago delle <strong>Antille</strong>. Territorio caratterizzato da:</p>
+      <ul>
+        <li>Vulcani attivi</li>
+        <li>Montagne e altipiani</li>
+        <li>Uragani tropicali frequenti</li>
+        <li>Canale di Panama (collega due oceani)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 Chiave di lettura:</strong> se ti chiedono "dove sono" i rilievi, pensa sempre alla <strong>direzione</strong> (ovest o est?) e al <strong>tipo</strong> (giovani o antichi?). Gli Appalachi e il Massiccio Brasiliano sono "fratelli": entrambi a est, entrambi vecchi.
+  </div>
+</section>
+
+<!-- ============ ACQUE ============ -->
+<section class="section" id="acque">
+  <div class="section-intro">
+    <h2>💧 Fiumi, laghi e oceani</h2>
+    <p>L'America è bagnata da <strong>tre oceani</strong>: l'Atlantico a est, il Pacifico a ovest, l'Artico a nord. Attenzione: ogni parte del continente ha i <strong>suoi</strong> fiumi principali — non confonderli!</p>
+  </div>
+
+  <div class="map-container">
+    <div class="map-title">Principali fiumi e laghi</div>
+    <svg viewBox="0 0 500 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mappa idrografica delle Americhe">
+      <rect x="0" y="0" width="500" height="650" fill="#d9e8f2"/>
+
+      <!-- Continents -->
+      <path d="M 60 80 Q 80 60 140 70 L 220 75 Q 280 80 340 95 L 380 120 Q 400 150 390 180 L 380 220 Q 360 250 320 260 L 280 280 L 260 310 L 230 320 L 200 310 L 170 290 L 140 260 L 110 230 L 80 180 L 65 140 Z"
+            fill="#e8d9b8" stroke="#8b7355" stroke-width="1.5"/>
+      <path d="M 200 310 L 230 320 L 250 340 L 260 360 L 245 380 L 230 395 L 235 420 L 250 430 L 260 420 Z"
+            fill="#e8d9b8" stroke="#8b7355" stroke-width="1.5"/>
+      <path d="M 250 430 L 290 440 Q 330 445 360 465 L 370 500 L 365 540 L 345 580 L 310 610 L 280 625 L 250 615 L 230 580 L 225 540 L 235 500 L 245 460 Z"
+            fill="#e8d9b8" stroke="#8b7355" stroke-width="1.5"/>
+
+      <!-- Great Lakes -->
+      <ellipse cx="240" cy="165" rx="12" ry="6" fill="#3a6ea5"/>
+      <ellipse cx="258" cy="172" rx="10" ry="5" fill="#3a6ea5"/>
+      <ellipse cx="275" cy="170" rx="9" ry="5" fill="#3a6ea5"/>
+      <ellipse cx="290" cy="175" rx="8" ry="4" fill="#3a6ea5"/>
+      <ellipse cx="302" cy="180" rx="7" ry="4" fill="#3a6ea5"/>
+      <text x="225" y="145" font-size="10" font-weight="bold" fill="#1e3a5f" font-family="Georgia">GRANDI LAGHI</text>
+
+      <!-- San Lorenzo river -->
+      <path d="M 302 180 Q 320 170 340 155 L 360 145" stroke="#3a6ea5" stroke-width="3" fill="none"/>
+      <text x="335" y="135" font-size="9" fill="#1e3a5f" font-family="Georgia" font-weight="bold">San Lorenzo</text>
+
+      <!-- Mississippi + Missouri system -->
+      <path d="M 200 130 Q 210 170 215 210 Q 220 240 230 270" stroke="#3a6ea5" stroke-width="3" fill="none"/>
+      <path d="M 140 165 Q 170 180 200 195" stroke="#3a6ea5" stroke-width="2.5" fill="none"/>
+      <text x="225" y="215" font-size="10" font-weight="bold" fill="#1e3a5f" font-family="Georgia">Mississippi</text>
+      <text x="140" y="160" font-size="10" font-weight="bold" fill="#1e3a5f" font-family="Georgia">Missouri</text>
+
+      <!-- Rio Grande -->
+      <path d="M 200 270 Q 215 290 230 310" stroke="#3a6ea5" stroke-width="2" fill="none"/>
+      <text x="170" y="295" font-size="9" fill="#1e3a5f" font-family="Georgia" font-weight="bold">Rio Grande</text>
+
+      <!-- Yukon -->
+      <path d="M 100 95 Q 85 105 75 120" stroke="#3a6ea5" stroke-width="2" fill="none"/>
+      <text x="78" y="88" font-size="9" fill="#1e3a5f" font-family="Georgia" font-weight="bold">Yukon</text>
+
+      <!-- Amazon -->
+      <path d="M 250 490 Q 290 495 330 500 Q 355 502 365 505" stroke="#3a6ea5" stroke-width="4" fill="none"/>
+      <text x="265" y="484" font-size="11" font-weight="bold" fill="#1e3a5f" font-family="Georgia">Rio delle Amazzoni</text>
+      <text x="275" y="515" font-size="8" fill="#1e3a5f" font-family="Georgia" font-style="italic">(il più grande del mondo per portata)</text>
+
+      <!-- Orinoco -->
+      <path d="M 275 450 Q 295 445 315 448" stroke="#3a6ea5" stroke-width="2.5" fill="none"/>
+      <text x="285" y="440" font-size="10" font-weight="bold" fill="#1e3a5f" font-family="Georgia">Orinoco</text>
+      <text x="288" y="462" font-size="8" fill="#1e3a5f" font-family="Georgia" font-style="italic">(Sud America!)</text>
+
+      <!-- Paraná / Rio de la Plata -->
+      <path d="M 320 540 Q 300 565 285 590" stroke="#3a6ea5" stroke-width="2.5" fill="none"/>
+      <text x="305" y="545" font-size="10" font-weight="bold" fill="#1e3a5f" font-family="Georgia">Paraná</text>
+
+      <!-- Ocean labels -->
+      <text x="15" y="300" font-size="13" fill="#1e3a5f" font-family="Georgia" font-style="italic" font-weight="bold">OCEANO</text>
+      <text x="15" y="318" font-size="13" fill="#1e3a5f" font-family="Georgia" font-style="italic" font-weight="bold">PACIFICO</text>
+      <text x="410" y="300" font-size="13" fill="#1e3a5f" font-family="Georgia" font-style="italic" font-weight="bold">OCEANO</text>
+      <text x="405" y="318" font-size="13" fill="#1e3a5f" font-family="Georgia" font-style="italic" font-weight="bold">ATLANTICO</text>
+      <text x="200" y="25" font-size="11" fill="#1e3a5f" font-family="Georgia" font-style="italic" font-weight="bold">OCEANO ARTICO</text>
+    </svg>
+  </div>
+
+  <div class="card-grid">
+    <div class="card water">
+      <h3>💧 Fiumi del Nord America</h3>
+      <ul>
+        <li><span class="pill water">Mississippi</span> il più lungo degli USA</li>
+        <li><span class="pill water">Missouri</span> affluente del Mississippi</li>
+        <li><span class="pill water">San Lorenzo</span> collega i Grandi Laghi all'Atlantico</li>
+        <li><span class="pill water">Rio Grande</span> confine USA-Messico</li>
+        <li><span class="pill water">Yukon</span> in Alaska/Canada</li>
+        <li><span class="pill water">Colorado</span> ha scavato il Grand Canyon</li>
+      </ul>
+    </div>
+    <div class="card water">
+      <h3>💧 Fiumi del Sud America</h3>
+      <ul>
+        <li><span class="pill water">Rio delle Amazzoni</span> il più grande del mondo per portata d'acqua</li>
+        <li><span class="pill water">Orinoco</span> scorre in Venezuela</li>
+        <li><span class="pill water">Paraná</span> forma il Rio de la Plata</li>
+      </ul>
+      <p style="margin-top:0.8rem;"><strong>Attenzione!</strong> L'Orinoco è in <span class="highlight">Sud America</span>, non in Nord America.</p>
+    </div>
+    <div class="card water">
+      <h3>🏞️ I Grandi Laghi</h3>
+      <p>Si trovano al <strong>confine tra USA e Canada</strong>, in Nord America. Sono 5, in ordine da ovest a est:</p>
+      <ul>
+        <li><strong>Superiore</strong> (il più grande)</li>
+        <li><strong>Michigan</strong></li>
+        <li><strong>Huron</strong></li>
+        <li><strong>Erie</strong></li>
+        <li><strong>Ontario</strong></li>
+      </ul>
+      <p>Sfociano nell'Atlantico tramite il fiume <strong>San Lorenzo</strong>.</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>🧠 Trucco per ricordarli:</strong> per i Grandi Laghi prova con le iniziali <strong>"S-M-H-E-O"</strong> (Superiore, Michigan, Huron, Erie, Ontario). Oppure costruisci una frase con queste lettere!
+  </div>
+</section>
+
+<!-- ============ AMBIENTI ============ -->
+<section class="section" id="ambienti">
+  <div class="section-intro">
+    <h2>🌿 Gli ambienti naturali</h2>
+    <p>L'America si estende per <strong>migliaia di chilometri dal nord al sud</strong>: per questo attraversa quasi tutti gli ambienti del pianeta, dal gelo polare alla foresta equatoriale.</p>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-header">
+        ❄️ Ambienti freddi (nord estremo)
+        <span class="arrow">▶</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p><strong>Tundra</strong> — Alaska e nord del Canada. Terreno gelato per gran parte dell'anno (<em>permafrost</em>), niente alberi, solo muschi e licheni. D'estate breve si ricopre di erba e fiori.</p>
+          <p><strong>Taiga</strong> — foresta di <strong>conifere</strong> (abeti, pini). Si estende per un'enorme fascia in Canada.</p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-header">
+        🌳 Ambienti temperati (zone centrali)
+        <span class="arrow">▶</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p><strong>Foresta temperata</strong> — alberi che perdono le foglie in autunno (latifoglie). Presente negli USA orientali.</p>
+          <p><strong>Prateria</strong> — enormi pianure erbose negli USA centrali (chiamate anche "<em>Great Plains</em>"). Un tempo popolate dai bisonti.</p>
+          <p><strong>Pampa</strong> — pianura erbosa del Sud America (Argentina, Uruguay). Molto simile alla prateria del Nord.</p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-header">
+        🏜️ Deserti
+        <span class="arrow">▶</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Sono aree pochissimo piovose. I principali:</p>
+          <ul>
+            <li><strong>Mojave</strong> e <strong>Sonora</strong> — tra USA sudoccidentali e Messico</li>
+            <li><strong>Atacama</strong> — in Cile, uno dei più aridi del mondo</li>
+            <li><strong>Patagonia</strong> — steppa fredda e ventosa nel Sud dell'Argentina</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-header">
+        🌴 Ambienti caldi (zone tropicali)
+        <span class="arrow">▶</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p><strong>Foresta tropicale / equatoriale (Amazzonia)</strong> — "il polmone verde della Terra". Ospita milioni di specie viventi, ma è minacciata dalla <em>deforestazione</em>.</p>
+          <p><strong>Savana</strong> — praterie con alberi radi, clima caldo con stagioni umide e secche.</p>
+          <p><strong>America centrale e Caraibi</strong> — clima tropicale, frequenti uragani.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>🗺️ Come organizzare la risposta:</strong> quando descrivi gli ambienti, <strong>vai dall'alto verso il basso</strong> (dal Polo Nord al Sud). Così dimostri di aver capito che è la <strong>latitudine</strong> a determinare quasi tutto.
+  </div>
+</section>
+
+<!-- ============ STORIA ============ -->
+<section class="section" id="storia">
+  <div class="section-intro">
+    <h2>📜 Eventi che hanno segnato la storia americana</h2>
+    <p>Qui trovi una <strong>linea del tempo</strong> con gli eventi principali. Per la verifica ne bastano <strong>tre</strong>: scegli quelli che ti sono più chiari e sappili raccontare con le tue parole.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🏛️ Prima del 1492</h3>
+      <p>In America vivevano da millenni le <strong>civiltà precolombiane</strong>:</p>
+      <ul>
+        <li><strong>Maya</strong> — America centrale, matematica e astronomia avanzate</li>
+        <li><strong>Aztechi</strong> — Messico, città-capitale Tenochtitlán</li>
+        <li><strong>Inca</strong> — Ande (Perù), impero esteso</li>
+      </ul>
+    </div>
+    <div class="card sun">
+      <h3>⛵ 1492 — Arrivo degli europei</h3>
+      <p><strong>Cristoforo Colombo</strong> sbarca nelle Antille. Inizia la <strong>colonizzazione</strong> europea: spagnoli, portoghesi, inglesi, francesi. Per i nativi è un disastro: malattie, guerre, schiavitù.</p>
+    </div>
+    <div class="card">
+      <h3>🔗 XVI–XIX sec. — Tratta degli schiavi</h3>
+      <p>Milioni di africani furono <strong>deportati</strong> come schiavi nelle piantagioni americane. È la base della presenza africana in tutto il continente.</p>
+    </div>
+    <div class="card sun">
+      <h3>🗽 1776 — Indipendenza USA</h3>
+      <p>Le 13 colonie si <strong>ribellano all'Inghilterra</strong>. Nasce una delle prime democrazie moderne. Poi, tra '800 e '900, si rendono indipendenti quasi tutti gli Stati dell'America centrale e meridionale.</p>
+    </div>
+    <div class="card">
+      <h3>⚔️ 1861-1865 — Guerra di secessione</h3>
+      <p>Negli USA, <strong>Nord contro Sud</strong>: vince il Nord, viene abolita la schiavitù. Presidente: <strong>Abraham Lincoln</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>✊ 1955-1968 — Diritti civili</h3>
+      <p>Lotta contro la discriminazione razziale negli USA. Protagonisti: <strong>Martin Luther King</strong>, Rosa Parks, Malcolm X.</p>
+    </div>
+    <div class="card sun">
+      <h3>💥 11 settembre 2001</h3>
+      <p>Attentato alle <strong>Torri Gemelle</strong> di New York. Cambia la politica internazionale: inizia la "guerra al terrore".</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>🎯 Per la verifica:</strong> non servono tutte le date. Scegli <strong>tre eventi diversi tra loro</strong> (per esempio: uno antico, uno moderno, uno recente) e per ciascuno spiega <em>quando</em>, <em>dove</em> e <em>cosa è cambiato</em>.
+  </div>
+</section>
+
+<!-- ============ POPOLI ============ -->
+<section class="section" id="popoli">
+  <div class="section-intro">
+    <h2>🗣️ Popoli, lingue e religioni</h2>
+    <p>L'America è un continente <strong>multiculturale</strong>: nativi, europei, africani, asiatici si sono incrociati nei secoli creando una popolazione mista e una varietà di lingue e religioni.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card earth">
+      <h3>👥 Gruppi umani</h3>
+      <ul>
+        <li><strong>Nativi americani (amerindi)</strong> — i primi abitanti, arrivati dall'Asia attraverso lo Stretto di Bering migliaia di anni fa</li>
+        <li><strong>Europei</strong> — arrivati dal 1492 (spagnoli, portoghesi, inglesi, francesi, italiani...)</li>
+        <li><strong>Africani</strong> — deportati come schiavi</li>
+        <li><strong>Asiatici</strong> — cinesi, giapponesi, indiani, arrivati più di recente</li>
+      </ul>
+    </div>
+    <div class="card earth">
+      <h3>🌈 Incroci tra popoli</h3>
+      <p>Dagli incroci tra gruppi sono nate popolazioni miste:</p>
+      <ul>
+        <li><strong>Meticci</strong> = bianchi + nativi</li>
+        <li><strong>Mulatti</strong> = bianchi + africani</li>
+        <li><strong>Zambos</strong> = africani + nativi</li>
+      </ul>
+      <p class="tip-box" style="margin-top:0.8rem;"><strong>⚠️ Non confondere meticci e mulatti!</strong> Un trucco: <em>"mulatti"</em> e <em>"nero"</em> hanno entrambi la lettera... pensa a cosa accomuna i due termini.</p>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div class="map-title">Divisione linguistica del continente</div>
+    <svg viewBox="0 0 500 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mappa linguistica delle Americhe">
+      <rect x="0" y="0" width="500" height="650" fill="#d9e8f2"/>
+
+      <!-- North America - English/French -->
+      <path d="M 60 80 Q 80 60 140 70 L 220 75 Q 280 80 340 95 L 380 120 Q 400 150 390 180 L 380 220 Q 360 250 320 260 L 280 280 L 260 290 L 250 270 L 245 250 L 240 220 L 230 200 L 220 180 L 200 160 L 180 150 L 150 145 L 120 135 L 100 120 L 80 110 Z"
+            fill="#b3d4ec" stroke="#3a6ea5" stroke-width="1.5"/>
+
+      <!-- Mexico/Central America - Spanish -->
+      <path d="M 260 290 L 280 280 L 320 260 L 280 280 L 260 310 L 230 320 L 200 310 L 230 320 L 250 340 L 260 360 L 245 380 L 230 395 L 235 420 L 250 430 L 260 420 L 250 405 L 240 385 L 255 360 L 260 340 L 255 320 Z"
+            fill="#f5d4a8" stroke="#a0522d" stroke-width="1.5"/>
+
+      <!-- South America mostly Spanish, Brazil Portuguese -->
+      <path d="M 250 430 L 290 440 Q 330 445 360 465 L 370 500 L 365 540 L 345 580 L 310 610 L 280 625 L 250 615 L 230 580 L 225 540 L 235 500 L 245 460 Z"
+            fill="#f5d4a8" stroke="#a0522d" stroke-width="1.5"/>
+
+      <!-- Brazil (Portuguese) -->
+      <path d="M 290 445 Q 330 445 360 465 L 370 500 L 365 540 L 345 580 L 320 580 L 310 560 L 300 530 L 295 500 Z"
+            fill="#c4d4a5" stroke="#5a7a3a" stroke-width="1.5"/>
+
+      <!-- Labels -->
+      <text x="130" y="170" font-size="14" font-weight="bold" fill="#1e3a5f" font-family="Georgia">INGLESE</text>
+      <text x="295" y="130" font-size="11" font-weight="bold" fill="#1e3a5f" font-family="Georgia">FRANCESE</text>
+      <text x="295" y="145" font-size="9" fill="#1e3a5f" font-family="Georgia">(Québec)</text>
+
+      <text x="195" y="370" font-size="13" font-weight="bold" fill="#8b4423" font-family="Georgia">SPAGNOLO</text>
+      <text x="240" y="520" font-size="14" font-weight="bold" fill="#8b4423" font-family="Georgia">SPAGNOLO</text>
+      <text x="320" y="510" font-size="13" font-weight="bold" fill="#3d5221" font-family="Georgia">PORTOGHESE</text>
+      <text x="330" y="525" font-size="9" fill="#3d5221" font-family="Georgia">(Brasile)</text>
+
+      <!-- Division indicator -->
+      <path d="M 15 315 L 485 315" stroke="#a0522d" stroke-width="1" stroke-dasharray="5,3"/>
+      <text x="170" y="310" font-size="10" font-weight="bold" fill="#a0522d" font-family="Georgia" background="#fff">linea di divisione linguistica</text>
+    </svg>
+    <div class="map-legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#b3d4ec;"></span> America anglosassone</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#f5d4a8;"></span> America latina (spagnolo)</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#c4d4a5;"></span> Brasile (portoghese)</span>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card water">
+      <h3>🇺🇸 America anglosassone</h3>
+      <p><strong>Nord America</strong> (Stati Uniti e Canada).</p>
+      <p><strong>Lingue:</strong> inglese principalmente; francese in Québec (Canada).</p>
+      <p><strong>Religioni:</strong> prevalentemente <strong>protestantesimo</strong>, ma anche cattolicesimo (ispanici, francesi, italiani), ebraismo, islam, induismo.</p>
+    </div>
+    <div class="card sun">
+      <h3>🇲🇽 America latina</h3>
+      <p><strong>America centrale e meridionale</strong>.</p>
+      <p><strong>Lingue:</strong> <strong>spagnolo</strong> in quasi tutti gli Stati; <strong>portoghese</strong> in Brasile; sopravvivono molte lingue indigene (quechua, guaraní…).</p>
+      <p><strong>Religioni:</strong> prevalentemente <strong>cattolicesimo</strong> (eredità della colonizzazione spagnola e portoghese).</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>🔑 Trucco di memoria:</strong> <em>"Anglo-sassone"</em> ti ricorda l'Inghilterra → <strong>inglese</strong> e <strong>protestantesimo</strong>. <em>"Latina"</em> ti ricorda le lingue derivate dal latino → <strong>spagnolo e portoghese</strong>, e la religione cattolica.
+  </div>
+</section>
+
+<!-- ============ ECONOMIA ============ -->
+<section class="section" id="economia">
+  <div class="section-intro">
+    <h2>💰 L'economia delle tre Americhe</h2>
+    <p>Tre realtà molto diverse tra loro: un continente <strong>ricco e tecnologico</strong> a nord, un'area <strong>in crescita ma con forti disuguaglianze</strong> a sud, un'area <strong>fragile</strong> al centro.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>🏙️ America settentrionale</h3>
+      <p><span class="pill">Economia avanzata</span></p>
+      <ul>
+        <li><strong>Terziario avanzato</strong>: finanza (Wall Street), servizi, ricerca</li>
+        <li><strong>Alta tecnologia</strong>: Silicon Valley, informatica, aerospaziale</li>
+        <li><strong>Agricoltura industriale</strong>: grano, mais, soia</li>
+        <li><strong>Industria</strong>: automobili, petrolio, armi, cinema</li>
+      </ul>
+      <p><em>USA = prima economia mondiale, insieme a pochi altri Paesi.</em></p>
+    </div>
+    <div class="card sun">
+      <h3>🏝️ America centrale</h3>
+      <p><span class="pill earth">Economia fragile</span></p>
+      <ul>
+        <li><strong>Agricoltura di esportazione</strong>: caffè, banane, canna da zucchero</li>
+        <li><strong>Turismo</strong> nei Caraibi</li>
+        <li><strong>Maquiladoras</strong>: fabbriche al confine con USA dove si monta a basso costo</li>
+        <li>Forti <strong>disuguaglianze</strong>, emigrazione verso il Nord</li>
+      </ul>
+    </div>
+    <div class="card forest">
+      <h3>🌾 America meridionale</h3>
+      <p><span class="pill forest">Economia emergente</span></p>
+      <ul>
+        <li><strong>Materie prime</strong>: petrolio (Venezuela), rame (Cile), ferro (Brasile)</li>
+        <li><strong>Agricoltura estensiva</strong>: soia, caffè, carne</li>
+        <li><strong>Industria</strong> in crescita (Brasile, Argentina)</li>
+        <li>Grandi <strong>disuguaglianze</strong> sociali: ricchi pochi, poveri tanti</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-header">
+        🐉 Chi può superare l'economia USA?
+        <span class="arrow">▶</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Da anni il Paese che <strong>si sta avvicinando</strong> sempre di più agli USA è la <strong>Cina</strong>. Come sta riuscendo a farlo?</p>
+          <ul>
+            <li><strong>Produzione industriale</strong> enorme: la Cina è la "fabbrica del mondo"</li>
+            <li><strong>Tecnologia</strong>: forti investimenti in informatica, telefonia (Huawei, TikTok), intelligenza artificiale</li>
+            <li><strong>Infrastrutture</strong>: grandi progetti come la "<strong>Nuova Via della Seta</strong>" (Belt and Road Initiative) per collegare l'Asia all'Europa e all'Africa</li>
+            <li><strong>Investimenti all'estero</strong>: in Africa, in America Latina, in Europa</li>
+            <li><strong>Popolazione</strong> enorme: circa 1,4 miliardi di persone</li>
+          </ul>
+          <p>Al momento gli USA restano davanti, ma la <strong>competizione economica</strong> è altissima.</p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-header">
+        💸 Ricchezza mal distribuita
+        <span class="arrow">▶</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>In tutta l'America (specialmente quella latina, ma anche negli USA) la ricchezza è <strong>concentrata nelle mani di una piccola minoranza</strong>: pochissimi possiedono moltissimo, tantissimi vivono in povertà o in condizioni fragili.</p>
+          <p>Conseguenze:</p>
+          <ul>
+            <li>Slum e <strong>favelas</strong> (baraccopoli) nelle grandi città</li>
+            <li>Emigrazione dall'America latina verso gli USA</li>
+            <li>Movimenti sociali e proteste</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>📊 Schema rapido per la domanda 9:</strong> per ogni area scrivi <em>(1)</em> com'è l'economia nel complesso, <em>(2)</em> i <strong>settori principali</strong> (primario/secondario/terziario), <em>(3)</em> un <strong>problema</strong> specifico. Se organizzi così, la risposta è completa.
+  </div>
+</section>
+
+<!-- ============ GLOSSARIO ============ -->
+<section class="section" id="glossario">
+  <div class="section-intro">
+    <h2>📖 Parole chiave da sapere</h2>
+    <p>Se padroneggi queste parole, capisci meglio le domande e dai risposte precise.</p>
+  </div>
+
+  <div class="glossary-term"><strong>Istmo</strong> — striscia stretta di terra che unisce due aree più grandi. <em>Esempio:</em> l'America centrale è un istmo tra Nord e Sud.</div>
+  <div class="glossary-term"><strong>Arcipelago</strong> — gruppo di isole vicine. <em>Esempio:</em> le Antille.</div>
+  <div class="glossary-term"><strong>Cordigliera</strong> — grande sistema di montagne parallele. <em>Esempio:</em> la Cordigliera delle Ande.</div>
+  <div class="glossary-term"><strong>Stretto</strong> — braccio di mare stretto che separa due terre. <em>Esempio:</em> lo Stretto di Bering tra Alaska e Siberia.</div>
+  <div class="glossary-term"><strong>Rilievi giovani</strong> — montagne alte e appuntite, formate di recente dallo scontro tra placche tettoniche.</div>
+  <div class="glossary-term"><strong>Rilievi antichi</strong> — montagne basse e arrotondate, consumate nei millenni dall'erosione.</div>
+  <div class="glossary-term"><strong>Tundra</strong> — ambiente freddo senza alberi, con terreno gelato (permafrost).</div>
+  <div class="glossary-term"><strong>Taiga</strong> — foresta di conifere delle zone fredde.</div>
+  <div class="glossary-term"><strong>Prateria / Pampa</strong> — pianure erbose (Nord / Sud America).</div>
+  <div class="glossary-term"><strong>Amerindi</strong> — nativi americani, i popoli che vivevano in America prima dell'arrivo degli europei.</div>
+  <div class="glossary-term"><strong>Precolombiani</strong> — civiltà esistite in America <em>prima</em> dell'arrivo di Colombo (1492): Maya, Aztechi, Inca.</div>
+  <div class="glossary-term"><strong>Meticci</strong> — persone nate dall'unione tra europei e nativi americani.</div>
+  <div class="glossary-term"><strong>Mulatti</strong> — persone nate dall'unione tra europei e africani.</div>
+  <div class="glossary-term"><strong>Favelas</strong> — quartieri poveri e improvvisati delle città sudamericane (parola portoghese, usata soprattutto per il Brasile).</div>
+  <div class="glossary-term"><strong>Maquiladoras</strong> — fabbriche messicane vicino al confine USA dove si assemblano prodotti a basso costo.</div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="section" id="quiz">
+  <div class="quiz-intro">
+    <h2>✏️ Mettiti alla prova</h2>
+    <p>10 domande di auto-verifica. Sono <strong>diverse</strong> da quelle della verifica: servono per allenarti sui concetti, non per conoscere le risposte in anticipo. Prova tu, poi guarda il punteggio!</p>
+    <p style="font-size:0.9rem; color:var(--ink-soft); margin-bottom:0;"><em>Puoi rifare il quiz quante volte vuoi premendo "Ricomincia".</em></p>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="quiz-score" id="quiz-score">
+    <h3>Hai completato il quiz! 🎉</h3>
+    <div class="score-big"><span id="score-value">0</span>/10</div>
+    <p id="score-message"></p>
+    <button class="btn-primary" onclick="resetQuiz()">🔄 Ricomincia</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>📚 Strumento di ripasso per la verifica di geografia — Buono studio!</p>
+  <p style="font-size:0.8rem; opacity:0.7;">Ripassa le schede, poi prova il quiz. Se qualcosa non è chiaro, chiedi al tuo insegnante di rispiegartelo.</p>
+</footer>
+
+<script>
+  // Navigation
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const sections = document.querySelectorAll('.section');
+
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      navBtns.forEach(b => b.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Accordion
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+
+  // UDL Tools
+  const bodyEl = document.body;
+  const btnReadable = document.getElementById('btn-readable');
+  const btnLarge = document.getElementById('btn-large');
+  const btnRead = document.getElementById('btn-read');
+  const btnStop = document.getElementById('btn-stop');
+
+  btnReadable.addEventListener('click', () => {
+    bodyEl.classList.toggle('high-readability');
+    btnReadable.classList.toggle('active');
+    btnReadable.setAttribute('aria-pressed', bodyEl.classList.contains('high-readability'));
+  });
+
+  btnLarge.addEventListener('click', () => {
+    bodyEl.classList.toggle('larger-text');
+    btnLarge.classList.toggle('active');
+    btnLarge.setAttribute('aria-pressed', bodyEl.classList.contains('larger-text'));
+  });
+
+  btnRead.addEventListener('click', () => {
+    if ('speechSynthesis' in window) {
+      const activeSection = document.querySelector('.section.active');
+      const text = activeSection.innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'it-IT';
+      utterance.rate = 0.95;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
+      btnRead.classList.add('active');
+    } else {
+      alert('La lettura vocale non è supportata su questo browser.');
+    }
+  });
+
+  btnStop.addEventListener('click', () => {
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+      btnRead.classList.remove('active');
+    }
+  });
+
+  // Quiz data — DOMANDE DIVERSE dalla verifica, per allenamento
+  const quizData = [
+    {
+      q: "In quale parte dell'America settentrionale si trovano le Montagne Rocciose?",
+      options: ["Nella zona orientale, vicino all'Atlantico", "Nella zona occidentale, vicino al Pacifico", "Al centro, tra i Grandi Laghi", "Nella penisola della Florida"],
+      correct: 1,
+      hint: "Ripensa alla regola: rilievi giovani → lato dove si scontrano le placche tettoniche."
+    },
+    {
+      q: "Gli Appalachi sono catene montuose:",
+      options: ["Altissime e recenti come le Ande", "Di modesta altezza, antiche ed erose", "Formate da vulcani ancora attivi", "Coperte da ghiacciai tutto l'anno"],
+      correct: 1,
+      hint: "Rilievi antichi = più vecchi → hanno avuto tempo per erodersi."
+    },
+    {
+      q: "Il fiume che NON scorre in America settentrionale è:",
+      options: ["Mississippi", "Missouri", "Orinoco", "San Lorenzo"],
+      correct: 2,
+      hint: "Uno di questi fiumi si trova invece in Venezuela."
+    },
+    {
+      q: "Lo Stretto di Bering mette in comunicazione:",
+      options: ["L'America settentrionale con l'Asia", "L'America settentrionale con l'Europa", "L'America meridionale con l'Africa", "Il Canada con il Messico"],
+      correct: 0,
+      hint: "Pensa ai primi popoli che arrivarono in America: da dove venivano?"
+    },
+    {
+      q: "I Grandi Laghi si trovano:",
+      options: ["Tra Messico e Stati Uniti", "Tra Stati Uniti e Canada", "In Brasile e Argentina", "In Alaska"],
+      correct: 1,
+      hint: "Sono 5 laghi enormi che fanno da confine tra due grandi Paesi del Nord."
+    },
+    {
+      q: "I meticci sono persone nate dall'incrocio tra:",
+      options: ["Europei e africani", "Europei e nativi americani", "Africani e nativi americani", "Asiatici ed europei"],
+      correct: 1,
+      hint: "Attento a non confondere meticci e mulatti: uno è l'unione con i nativi, l'altro con gli africani."
+    },
+    {
+      q: "La religione prevalente in America settentrionale è:",
+      options: ["Cattolicesimo", "Protestantesimo", "Ortodossia", "Islam"],
+      correct: 1,
+      hint: "Le prime colonie inglesi del Nord erano soprattutto di quale confessione cristiana?"
+    },
+    {
+      q: "L'America centrale è caratterizzata da:",
+      options: ["Grandi pianure ghiacciate", "Un istmo stretto con vulcani e arcipelaghi", "Un'unica grande isola", "Solo deserti e dune di sabbia"],
+      correct: 1,
+      hint: "Pensa alla forma del territorio: unisce due parti molto più grandi."
+    },
+    {
+      q: "Nell'economia americana, la ricchezza è:",
+      options: ["Distribuita in parti uguali tra tutti", "Concentrata nelle mani di una minoranza", "Controllata dagli Stati", "Uguale in tutti i Paesi del continente"],
+      correct: 1,
+      hint: "Le favelas e le baraccopoli sono un segnale di cosa?"
+    },
+    {
+      q: "Il Paese che più sta crescendo economicamente e potrebbe superare gli USA è:",
+      options: ["Il Giappone", "La Cina", "L'India", "La Russia"],
+      correct: 1,
+      hint: "Si parla spesso di 'Nuova Via della Seta' per le sue infrastrutture nel mondo."
+    }
+  ];
+
+  let userAnswers = new Array(quizData.length).fill(null);
+
+  function renderQuiz() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+    quizData.forEach((item, i) => {
+      const qDiv = document.createElement('div');
+      qDiv.className = 'quiz-question';
+      qDiv.innerHTML = `
+        <h4>Domanda ${i + 1}. ${item.q}</h4>
+        <div class="quiz-options" id="opts-${i}">
+          ${item.options.map((opt, j) => `
+            <button class="quiz-option" data-q="${i}" data-opt="${j}">${String.fromCharCode(65 + j)}. ${opt}</button>
+          `).join('')}
+        </div>
+        <div class="quiz-feedback" id="fb-${i}"></div>
+      `;
+      container.appendChild(qDiv);
+    });
+
+    document.querySelectorAll('.quiz-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const qi = parseInt(btn.dataset.q);
+        const oi = parseInt(btn.dataset.opt);
+        if (userAnswers[qi] !== null) return;
+        userAnswers[qi] = oi;
+
+        const opts = document.querySelectorAll(`#opts-${qi} .quiz-option`);
+        opts.forEach(o => o.disabled = true);
+
+        const correctIdx = quizData[qi].correct;
+        const fb = document.getElementById(`fb-${qi}`);
+
+        if (oi === correctIdx) {
+          btn.classList.add('correct');
+          fb.className = 'quiz-feedback show right';
+          fb.textContent = '✓ Risposta corretta! Ottimo lavoro.';
+        } else {
+          btn.classList.add('wrong');
+          opts[correctIdx].classList.add('correct');
+          fb.className = 'quiz-feedback show improve';
+          fb.textContent = '✗ Non ci sei. Suggerimento: ' + quizData[qi].hint;
+        }
+
+        // Check if all done
+        if (userAnswers.every(a => a !== null)) {
+          showScore();
+        }
+      });
+    });
+  }
+
+  function showScore() {
+    const correct = userAnswers.filter((a, i) => a === quizData[i].correct).length;
+    document.getElementById('score-value').textContent = correct;
+    const msg = document.getElementById('score-message');
+    if (correct === 10) msg.textContent = 'Perfetto! Sei prontissimo per la verifica. 🌟';
+    else if (correct >= 8) msg.textContent = 'Molto bene! Ripassa le poche cose che ti sono scappate.';
+    else if (correct >= 6) msg.textContent = 'Buon risultato, ma puoi fare ancora un ripasso mirato.';
+    else if (correct >= 4) msg.textContent = 'Bene così, ma ripassa le schede prima della verifica.';
+    else msg.textContent = 'Non scoraggiarti! Rileggi con calma le schede e riprova.';
+    document.getElementById('quiz-score').classList.add('show');
+    document.getElementById('quiz-score').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function resetQuiz() {
+    userAnswers = new Array(quizData.length).fill(null);
+    document.getElementById('quiz-score').classList.remove('show');
+    renderQuiz();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  renderQuiz();
+</script>
+
+</body>
+</html>
